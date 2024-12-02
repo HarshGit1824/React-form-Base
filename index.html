@@ -41,7 +41,7 @@
       function Counter() {
         let [counter, setCounter] = React.useState(0);
         return (
-            <React.Fragment>
+          <React.Fragment>
             <div className="flex text-6xl border border-zinc-600 w-fit p-2 gap-3 rounded-lg mb-3 my-3">
               <button
                 className="bg-blue-300 rounded-sm"
@@ -62,7 +62,7 @@
         );
       }
 
-      function Grid({limit = 0}) {
+      function Grid({ limit = 0 }) {
         const data = [
           {
             id: 1,
@@ -99,33 +99,30 @@
               return (
                 <div
                   key={currentObj.id}
-                  className="border border-zinc-800 rounded-lg p-4 w-48"
+                  className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4"
                 >
-                  <h2 className="text-2xl font-bold mb-2">{currentObj.name}</h2>
-                  <p>{currentObj.description}</p>
+                  <img
+                    className="w-full h-48 object-cover"
+                    src="https://via.placeholder.com/150"
+                    alt="Card Image"
+                  />
+                  <div className="p-4">
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                      {currentObj.name}
+                    </h2>
+                    <p className="mt-2 text-gray-600">
+                      {currentObj.description}
+                    </p>
+                    <div className="mt-4">
+                      <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        Learn More
+                      </button>
+                    </div>
+                  </div>
                 </div>
               );
             })}
           </div>
-          //   <div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4">
-          //     <img
-          //       class="w-full h-48 object-cover"
-          //       src="https://via.placeholder.com/150"
-          //       alt="Card Image"
-          //     />
-          //     <div class="p-4">
-          //       <h2 class="text-2xl font-semibold text-gray-800">Card Title</h2>
-          //       <p class="mt-2 text-gray-600">
-          //         This is a description of the card. It gives more details about
-          //         the content displayed above.
-          //       </p>
-          //       <div class="mt-4">
-          //         <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
-          //           Learn More
-          //         </button>
-          //       </div>
-          //     </div>
-          //   </div>
         );
       }
 
@@ -141,10 +138,11 @@
               </code>
             </p>
             <Counter />
-            <Grid/>
+            <Grid />
           </main>
         );
       }
+      
       root.render(
         <React.Fragment>
           <Header>
