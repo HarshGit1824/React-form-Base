@@ -92,9 +92,9 @@
           } else {
             // setCounter(counter - 1);
             setCounter((prevValue) => {
-            handleChange(prevValue - 1);
-            return prevValue - 1;
-          });
+              handleChange(prevValue - 1);
+              return prevValue - 1;
+            });
           }
         }
         return (
@@ -103,6 +103,7 @@
               <button
                 className="bg-blue-300 rounded-sm"
                 onClick={() => handleClick("-")}
+                disabled={counter === 0}
               >
                 -
               </button>
