@@ -83,9 +83,18 @@
 
         function handleClick(operation = "+") {
           if (operation === "+") {
-            setCounter(counter + 1);
+            // setCounter(counter + 1);
+            setCounter((prevValue) => {
+              handleChange(prevValue + 1);
+              return prevValue + 1;
+            });
+            return;
           } else {
-            setCounter(counter - 1);
+            // setCounter(counter - 1);
+            setCounter((prevValue) => {
+            handleChange(prevValue - 1);
+            return prevValue - 1;
+          });
           }
         }
         return (
@@ -174,7 +183,7 @@
       }
 
       function Main() {
-        const [size, setSize] = React.useState(4);
+        const [size, setSize] = React.useState(0);
         function handleChange(value) {
           setSize(value);
         }
