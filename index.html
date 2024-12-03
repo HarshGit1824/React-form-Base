@@ -30,34 +30,81 @@
     <script type="text/babel">
       const rootEl = document.querySelector("#app");
       const root = ReactDOM.createRoot(rootEl);
-      function Header({ children }) {
+      // function Header({ children }) {
+      //   return (
+      //     <header className="bg-zinc-500 px-8 py-6">
+      //       <h1 className="text-2xl font-semibold">{children}</h1>
+      //     </header>
+      //   );
+      // }
+
+      function Header({ children, bgColor = "light" }) {
+        const backgroundOptions = {
+          light: "bg-zinc-200",
+          blue: "bg-blue-200",
+          green: "bg-green-200",
+          red: "bg-red-200",
+        };
         return (
-          <header className="bg-zinc-500 px-8 py-6">
+          <header
+            className={`${backgroundOptions[bgColor]} px-8 py-6 border-b`}
+          >
             <h1 className="text-2xl font-semibold">{children}</h1>
           </header>
         );
       }
 
-      function Counter() {
+      // function Counter() {
+      //   let [counter, setCounter] = React.useState(0);
+      //   return (
+      //     <React.Fragment>
+      //       <div className="flex text-6xl border border-zinc-600 w-fit p-2 gap-3 rounded-lg mb-3 my-3">
+      //         <button
+      //           className="bg-blue-300 rounded-sm"
+      //           onClick={() => setCounter((preVal) => preVal - 1)}
+      //         >
+      //           -
+      //         </button>
+      //         <p>{counter}</p>
+      //         <button
+      //           className="bg-blue-300 rounded-sm"
+      //           onClick={() => setCounter((preVal) => preVal + 1)}
+      //         >
+      //           +
+      //         </button>
+      //       </div>
+      //       <Grid limit={counter} />
+      //     </React.Fragment>
+      //   );
+      // }
+
+      function Counter({ handleChange }) {
         let [counter, setCounter] = React.useState(0);
+
+        function handleClick(operation = "+") {
+          if (operation === "+") {
+            setCounter(counter + 1);
+          } else {
+            setCounter(counter - 1);
+          }
+        }
         return (
           <React.Fragment>
-            <div className="flex text-6xl border border-zinc-600 w-fit p-2 gap-3 rounded-lg mb-3 my-3">
+            <div className="flex text-6xl border border-zinc-600 w-fit p-2 gap-3 rounded-lg mb-3 my-2">
               <button
                 className="bg-blue-300 rounded-sm"
-                onClick={() => setCounter((preVal) => preVal - 1)}
+                onClick={() => handleClick("-")}
               >
                 -
               </button>
               <p>{counter}</p>
               <button
                 className="bg-blue-300 rounded-sm"
-                onClick={() => setCounter((preVal) => preVal + 1)}
+                onClick={() => handleClick("+")}
               >
                 +
               </button>
             </div>
-            <Grid limit={counter} />
           </React.Fragment>
         );
       }
@@ -127,6 +174,11 @@
       }
 
       function Main() {
+        const [size, setSize] = React.useState(4);
+        function handleChange(value) {
+          setSize(value);
+        }
+
         return (
           <main className="px-8 py-6 container">
             <h2 className="text-xl font-bold mb-3">Why? 🤔</h2>
@@ -137,17 +189,18 @@
                 package.json
               </code>
             </p>
-            <Counter />
+            <Counter handleChange={handleChange} />
+            <Grid limit={size} />
             <Grid />
           </main>
         );
       }
-      
+
       root.render(
         <React.Fragment>
-          <Header>
-            This is some text that we can use!
-            <span style={{ color: "red" }}>Text</span>
+          <Header bgColor="blue">
+            The library for web and native user interfaces!
+            <span style={{ color: "red" }}> React</span>
           </Header>
           <Main />
         </React.Fragment>
