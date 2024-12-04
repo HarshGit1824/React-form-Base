@@ -81,21 +81,27 @@
       function Counter({ handleChange }) {
         let [counter, setCounter] = React.useState(0);
 
-        function handleClick(operation = "+") {
-          if (operation === "+") {
-            // setCounter(counter + 1);
-            setCounter((prevValue) => {
-              handleChange(prevValue + 1);
-              return prevValue + 1;
-            });
-            return;
-          } else {
-            // setCounter(counter - 1);
-            setCounter((prevValue) => {
-              handleChange(prevValue - 1);
-              return prevValue - 1;
-            });
-          }
+        //   function handleClick(operation = "+") {
+        //     if (operation === "+") {
+        //       setCounter((prevValue) => {
+        //         let newValue = operation === "+" ? prevValue + 1 : prevValue - 1;
+        //         handleChange(newValue);
+        //         return newValue;
+        //       });
+        //     }
+        //   }
+
+        function handleClick(operation) {
+          setCounter((prevValue) => {
+            let newValue;
+            if (operation === "+") {
+              newValue = prevValue + 1;
+            } else if (operation === "-") {
+              newValue = prevValue - 1;
+            }
+            handleChange(newValue); // Notify the parent of the change
+            return newValue;
+          });
         }
         return (
           <React.Fragment>
