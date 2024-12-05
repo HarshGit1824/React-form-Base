@@ -126,36 +126,48 @@
       }
 
       function Grid({ limit = 0 }) {
-        const data = [
-          {
-            id: 1,
-            name: "React",
-            description: "A JavaScript library for building user interfaces",
-          },
-          {
-            id: 2,
-            name: "Angular",
-            description:
-              "A TypeScript-based open-source front-end web framework",
-          },
-          {
-            id: 3,
-            name: "Vue",
-            description:
-              "A progressive JavaScript framework for building user interfaces",
-          },
-          {
-            id: 4,
-            name: "Svelte",
-            description: "A compiler for building user interfaces",
-          },
-        ];
+        const [data, setData] = React.useState([]);
+        // const [click, setClick] = Recat.useState(false);
+        React.useEffect(() => {
+          fetch(
+            "https://raw.githubusercontent.com/gliese-sketch/Pokedex/refs/heads/main/src/ts/data.json"
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setData(data);
+            });
+        }, []);
 
-        const cards = [];
-        for (let i = 0; i < data.length; i++) {
-          const currentObj = data[i];
-          cards.push();
-        }
+        // const data = [
+        //   {
+        //     id: 1,
+        //     name: "React",
+        //     description: "A JavaScript library for building user interfaces",
+        //   },
+        //   {
+        //     id: 2,
+        //     name: "Angular",
+        //     description:
+        //       "A TypeScript-based open-source front-end web framework",
+        //   },
+        //   {
+        //     id: 3,
+        //     name: "Vue",
+        //     description:
+        //       "A progressive JavaScript framework for building user interfaces",
+        //   },
+        //   {
+        //     id: 4,
+        //     name: "Svelte",
+        //     description: "A compiler for building user interfaces",
+        //   },
+        // ];
+
+        // const cards = [];
+        // for (let i = 0; i < data.length; i++) {
+        //   const currentObj = data[i];
+        //   cards.push();
+        // }
         return (
           <div className="flex flex-wrap gap-4">
             {data.slice(0, limit < 0 ? 0 : limit).map((currentObj) => {
@@ -164,11 +176,6 @@
                   key={currentObj.id}
                   className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4"
                 >
-                  <img
-                    className="w-full h-48 object-cover"
-                    src="https://via.placeholder.com/150"
-                    alt="Card Image"
-                  />
                   <div className="p-4">
                     <h2 className="text-2xl font-semibold text-gray-800">
                       {currentObj.name}
@@ -176,6 +183,8 @@
                     <p className="mt-2 text-gray-600">
                       {currentObj.description}
                     </p>
+                    <img src={currentObj.image}></img>
+
                     <div className="mt-4">
                       <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
                         Learn More
